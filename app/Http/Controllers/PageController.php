@@ -19,9 +19,11 @@ class PageController extends Controller
     }
 
 
-    public function hotel()
+    public function hotel(Request $request)
     {
         $rooms = Room::all();
+  
+
         return view('user.hotel', compact('rooms'));
     }
 

@@ -5,6 +5,7 @@ use App\Http\Controllers\EsewaController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SortController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,6 +36,7 @@ require __DIR__ . '/auth.php';
 Route::get('/home', [PageController::class, 'index'])->name('user.index');
 Route::get('hotel', [PageController::class, 'hotel'])->name('user.hotel');
 Route::get('hotel/sort', [SortController::class, 'index'])->name('hotel.sort');
+Route::get('hotel/search', [SearchController::class, 'index'])->name('hotel.search');
 Route::get('hotel/view/{id}', [PageController::class, 'view'])->name('user.view');
 Route::get('/', [PageController::class, 'welcome'])->name('welcome');
 

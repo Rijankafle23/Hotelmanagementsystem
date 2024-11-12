@@ -12,6 +12,15 @@ class SortController extends Controller
     public function index(Request $request)
     {
         $rooms = Room::all();
+
+        $query = Room::query();
+
+        if ($request->filled('search')) {
+            $search = $request->input('search');
+            $query->where('name', 'like', '%' . $search . '%')
+                ->orWhere('description', 'like', '%' . $search . '%');
+        }
+
         $sortOption = $request->get('sort');
 
         switch ($sortOption) {
@@ -28,6 +37,11 @@ class SortController extends Controller
                 // Optionally handle default case or sorting
                 break;
         }
+
+
+
+
+
         return view('user.hotel', compact('rooms'));
     }
     public function sortAscending(Collection $collection, string $attribute): Collection
