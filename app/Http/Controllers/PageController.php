@@ -10,23 +10,25 @@ class PageController extends Controller
     public function index()
     {
         $rooms = Room::orderby('id', 'desc')->paginate(3);
-        return view('user.index',compact('rooms'));
+        return view('user.index', compact('rooms'));
     }
     public function welcome()
     {
         $rooms = Room::orderby('id', 'desc')->paginate(3);
-        return view('welcome',compact('rooms'));
+        return view('welcome', compact('rooms'));
     }
+
+
     public function hotel()
     {
         $rooms = Room::all();
-        return view('user.hotel',compact('rooms'));
+        return view('user.hotel', compact('rooms'));
     }
 
     public function view($id)
     {
         $room = Room::find($id);
-        return view('user.view',compact('room'));
+        return view('user.view', compact('room'));
     }
 
     public function admin()
@@ -34,5 +36,3 @@ class PageController extends Controller
         return view('dashboard');
     }
 }
-
-
