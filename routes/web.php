@@ -5,6 +5,8 @@ use App\Http\Controllers\EsewaController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\SearchController;
+use App\Http\Controllers\SortController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,37 +31,38 @@ Route::middleware('auth')->group(function () {
 
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
-Route::get('/home',[PageController::class,'index'])->name('user.index');
-Route::get('hotel',[PageController::class,'hotel'])->name('user.hotel');
-Route::get('hotel/view/{id}',[PageController::class,'view'])->name('user.view');
-Route::get('/',[PageController::class,'welcome'])->name('welcome');
+Route::get('/home', [PageController::class, 'index'])->name('user.index');
+Route::get('hotel', [PageController::class, 'hotel'])->name('user.hotel');
+Route::get('hotel/sort', [SortController::class, 'index'])->name('hotel.sort');
+Route::get('hotel/search', [SearchController::class, 'index'])->name('hotel.search');
+Route::get('hotel/view/{id}', [PageController::class, 'view'])->name('user.view');
+Route::get('/', [PageController::class, 'welcome'])->name('welcome');
 
 Route::middleware('auth')->group(function () {
 
 
 
-//booking  
-Route::post('/booking/store',[BookingController::class,'store'])->name('booking.store');
+    //booking  
+    Route::post('/booking/store', [BookingController::class, 'store'])->name('booking.store');
 
-//esewa
+    //esewa
 
-Route::get('/esewa/success',[EsewaController::class,'esewaSuccess'])->name('esewa.success');
-Route::post('/esewa/fail',[EsewaController::class,'esewaFail'])->name('esewa.fail');
+    Route::get('/esewa/success', [EsewaController::class, 'esewaSuccess'])->name('esewa.success');
+    Route::post('/esewa/fail', [EsewaController::class, 'esewaFail'])->name('esewa.fail');
 });
 
 
 
 //admin
 Route::middleware(['admin'])->group(function () {
-Route::get('/dashboard',[PageController::class,'admin'])->name('dashboard');
-Route::get('/rooms', [RoomController::class, 'index'])->name('room.index');
-Route::get('/users', [RoomController::class, 'userdetails'])->name('user.index');
-Route::get('/rooms/create', [RoomController::class, 'create'])->name('room.create');
-Route::post('/rooms/store', [RoomController::class, 'store'])->name('room.store');
-Route::get('/rooms/edit/{id}',[RoomController::class,'edit'])->name('room.edit');
-Route::post('/rooms/update/{id}',[RoomController::class,'update'])->name('room.update');
-Route::get('/rooms/delete/{id}',[RoomController::class,'destroy'])->name('room.delete');
-
+    Route::get('/dashboard', [PageController::class, 'admin'])->name('dashboard');
+    Route::get('/rooms', [RoomController::class, 'index'])->name('room.index');
+    Route::get('/users', [RoomController::class, 'userdetails'])->name('user.index');
+    Route::get('/rooms/create', [RoomController::class, 'create'])->name('room.create');
+    Route::post('/rooms/store', [RoomController::class, 'store'])->name('room.store');
+    Route::get('/rooms/edit/{id}', [RoomController::class, 'edit'])->name('room.edit');
+    Route::post('/rooms/update/{id}', [RoomController::class, 'update'])->name('room.update');
+    Route::get('/rooms/delete/{id}', [RoomController::class, 'destroy'])->name('room.delete');
 });
